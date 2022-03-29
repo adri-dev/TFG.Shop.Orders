@@ -1,3 +1,6 @@
+using FluentValidation;
+using MediatR;
+using TFG.Orders.Application.Behaviors;
 using TFG.Orders.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +13,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddMediatR(typeof(ValidationBehavior<,>).Assembly);
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+builder.Services.AddValidatorsFromAssembly(typeof(ValidationBehavior<,>).Assembly);
 
 var app = builder.Build();
 

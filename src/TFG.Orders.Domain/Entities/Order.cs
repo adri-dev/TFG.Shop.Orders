@@ -10,5 +10,12 @@
         {
             _lines = new List<OrderLine>();
         }
+
+        public Order AddLine(int productId, decimal productQuantity)
+        {
+            _lines.Add(new OrderLine(productId, productQuantity));
+
+            return this;
+        }
     }
 }

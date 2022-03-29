@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TFG.Orders.Application\TFG.Orders.Application.csproj" />
     <ProjectReference Include="..\TFG.Orders.Domain\TFG.Orders.Domain.csproj" />
   </ItemGroup>
 

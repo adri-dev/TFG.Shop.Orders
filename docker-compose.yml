@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  tfg.orders.api:
+    image: ${DOCKER_REGISTRY-}tfgordersapi
+    build:
+      context: .
+      dockerfile: src/TFG.Orders.Api/Dockerfile
+    depends_on:
+      tfg.orders.sqlserver:
+        condition: service_healthy
+
+  tfg.orders.sqlserver:
+    image: mcr.microsoft.com/mssql/server:${SQL_TAG:-2019-CU12-ubuntu-20.04}
+    container_name: tfg-orders-sqlserver

@@ -15,6 +15,5 @@ namespace TFG.Orders.Infrastructure.Persistance.Contexts
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(OrdersDbContext).Assembly);
         }
-
     }
 }
