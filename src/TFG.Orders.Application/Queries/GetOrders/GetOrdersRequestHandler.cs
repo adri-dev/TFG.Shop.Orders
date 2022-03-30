@@ -20,7 +20,8 @@ namespace TFG.Orders.Application.Queries.GetOrders
             foreach (var order in orders)
             {
                 var orderResponse = new OrderEntry(order.Id);
-                orderResponse.Lines = orderResponse.Lines.Select(l => new OrderEntry.OrderLine(l.Id, l.productId, l.quantity));
+                orderResponse.Lines = order.Lines.Select(l => new OrderEntry.OrderLine(l.Id, l.ProductId, l.ProductQuantity));
+                response.Add(orderResponse);
             }
 
             return response;

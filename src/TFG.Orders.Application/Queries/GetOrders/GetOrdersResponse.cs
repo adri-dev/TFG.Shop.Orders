@@ -4,12 +4,15 @@ namespace TFG.Orders.Application.Queries.GetOrders
 {
     public class OrderEntry
     {
-        public record OrderLine(int Id, int productId, decimal quantity);
+        public record OrderLine(int Id, int ProductId, decimal Quantity);
 
         public IEnumerable<OrderLine> Lines { get; set; }
 
+        public int Id { get; set; }
+
         public OrderEntry(int id)
         {
+            Id = id;
             Lines = new List<OrderLine>();
         }
     }

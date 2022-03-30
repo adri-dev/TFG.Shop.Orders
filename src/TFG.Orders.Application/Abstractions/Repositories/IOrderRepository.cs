@@ -4,7 +4,7 @@ namespace TFG.Orders.Application.Abstractions.Repositories
 {
     public interface IOrderRepository : IOrderReadOnlyRepository
     {
-        public Task AddAsync(Order order);
-        public Task SaveChangesAsync();
+        Task AddAsync(Order order);
+        Task SaveChangesAsync();
     }
 }
