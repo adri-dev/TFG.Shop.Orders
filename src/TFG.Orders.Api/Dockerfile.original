@@ -7,12 +7,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["src/TFG.Orders.Api/TFG.Orders.Api.csproj", "TFG.Orders.Api/"]
-COPY ["src/TFG.Orders.Infrastructure/TFG.Orders.Infrastructure.csproj", "TFG.Orders.Infrastructure/"]
-COPY ["src/TFG.Orders.Application/TFG.Orders.Application.csproj", "TFG.Orders.Application/"]
-COPY ["src/TFG.Orders.Domain/TFG.Orders.Domain.csproj", "TFG.Orders.Domain/"]
-RUN dotnet restore "TFG.Orders.Api/TFG.Orders.Api.csproj"
-WORKDIR "/src/TFG.Orders.Api"
+COPY ["TFG.Orders.Api.csproj", "TFG.Orders/"]
+RUN dotnet restore "TFG.Orders/TFG.Orders.Api.csproj"
+WORKDIR "/src/TFG.Orders"
 COPY . .
 RUN dotnet build "TFG.Orders.Api.csproj" -c Release -o /app/build
 

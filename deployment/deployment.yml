@@ -1,20 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tfgorders-deployment
+  name: orders-dply
 spec:
   selector:
     matchLabels:
-      app: tfgorders-pod
-  strategy: {}
+      app: orders
+      tier: backend
+      track: stable
+  replicas: 1
   template:
     metadata:
       labels:
-        app: tfgorders-pod
+        app: orders
+        tier: backend
+        track: stable
     spec:
       containers:
-      - image: docker.io/wadrydev/tfgorders
-        name: tfgorders-container
-        resources: {}
-        ports:
-          - containerPort: 80 
+        - name: orders
+          image: docker.io/wadrydev/tfgorders
+          env:
+          - name: ConnectionStrings__OrdersDb
+            value: Data Source=host.minikube.internal,5444;Initial Catalog=TFG.Orders;User ID=sa;Password=Pass@word!;TrustServerCertificate=True
+          ports:
+            - name: http
+              containerPort: 80

@@ -3,9 +3,10 @@ kind: Service
 metadata:
   name: tfgorders-svc
 spec:
-  ports:
-  - port: 8080
-    targetPort: 80
   selector:
-    app: tfgorders-pod
-  type: LoadBalancer
+    app: orders
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: http
