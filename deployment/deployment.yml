@@ -1,26 +1,33 @@
 apiVersion: apps/v1
+# Defining kind object as a deployment
 kind: Deployment
 metadata:
+  # Name of deployment
   name: orders-dply
+  # Labels of deployment
+  labels: 
+    app: orders
 spec:
+  # Defining selector, this will define how to search for our deployment
   selector:
     matchLabels:
       app: orders
-      tier: backend
-      track: stable
+  # Number of replicas
   replicas: 1
   template:
     metadata:
       labels:
         app: orders
-        tier: backend
-        track: stable
     spec:
+      # Containers that will be used in this deployment
       containers:
         - name: orders
+          # Image that needs to be previously pushed
           image: docker.io/wadrydev/tfgorders
+          # Environment variables that we need to override
           env:
           - name: ConnectionStrings__OrdersDb
+            # In this case we are using host.minikube.internal,5444 because is the host that minikube uses to comunicate with localhost dockers
             value: Data Source=host.minikube.internal,5444;Initial Catalog=TFG.Orders;User ID=sa;Password=Pass@word!;TrustServerCertificate=True
           ports:
             - name: http

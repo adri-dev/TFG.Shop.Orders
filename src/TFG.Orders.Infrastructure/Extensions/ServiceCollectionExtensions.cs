@@ -16,5 +16,14 @@ namespace TFG.Orders.Infrastructure.Extensions
                 .AddScoped<IOrderReadOnlyRepository, OrderRepository>()
                 .AddScoped<IOrderRepository, OrderRepository>();
         }
+
+        public static void ApplyMigrations(this IServiceProvider serviceProvider)
+        {
+            using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<OrdersDbContext>();
+                context.Database.Migrate();
+            }
+        }
     }
 }

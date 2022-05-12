@@ -4,5 +4,13 @@ variable "cluster_name" {
 }
 
 variable "resource_group_name" {
-  default = "tfg-k8s-rg"
+  default = "tfg-k8s"
+}
+
+variable "sql_server_name" {
+  default = "tfg-sql-svr"
+}
+
+variable "SQL_PASSWORD" {
+  sensitive = true
 }
